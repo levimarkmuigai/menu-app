@@ -2,7 +2,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { colors } from '../theme';
-import elephantImage from '../assets/elephant.png';
+import elephantImage from '../assets/elephant.jpg';
 
 /* Fade-in animation for smooth introduction */
 const fadeIn = keyframes`
