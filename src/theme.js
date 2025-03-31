@@ -6,5 +6,5 @@ export const colors = {
   darkBackground: '#2b2b2b',    // Section backgrounds
   tanGold: '#d2b48c',          // Accent color for badges & buttons
   darkTanGold: '#c9a671',      // Hover state accent
-  text: '#333',
+  text: '#333'
 };
