@@ -1,15 +1,14 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { colors } from './theme'; // theme contains our color palette
+import Header from './components/Header';
+import ProductsSection from './components/ProductsSection';
+import Footer from './components/Footer';
 
-// ========== ASSET IMPORTS (Update paths as needed) ==========
-import ElephantImg from './assets/elephant.png';
-import FriedBeansImg from './assets/beans-fried.png';
-import BoiledBeansImg from './assets/beans-boiled.png';
-
-// ========== STYLED COMPONENTS ==========
-
-// Container for the entire single-page layout
-const PageContainer = styled.div`
+// ==========================================================
+// SinglePageContainer: Container for the entire layout
+// ==========================================================
+const SinglePageContainer = styled.div`
   font-family: 'Arial', sans-serif;
   color: #000;
   background-color: #fff;
@@ -18,71 +17,65 @@ const PageContainer = styled.div`
   overflow-x: hidden;
 `;
 
-// ========== HEADER / BANNER ==========
-
+// ==========================================================
+// Banner Section (if used inside Header component)
+// ==========================================================
 const Banner = styled.header`
-  background: #f5f5f5; /* Light background for the top banner */
+  background: ${colors.lightGray || '#f5f5f5'}; /* Use theme color if available */
   position: relative;
   text-align: center;
   padding: 2rem 1rem;
   overflow: hidden;
+
   @media (max-width: 768px) {
     padding: 1.5rem 1rem;
   }
 `;
 
+// ==========================================================
+// LogoPlaceholder: Used for displaying a temporary logo
+// ==========================================================
 const LogoPlaceholder = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: #d2b48c; /* Tan/Gold placeholder color */
+  /* If this element is meant to be absolute, remove the "position: static" below */
+  position: static; /* Changed from absolute to static for mobile layout consistency */
+  background: ${colors.tanGold || '#d2b48c'};
   padding: 0.5rem 1rem;
   font-weight: bold;
   border-radius: 4px;
-  @media (max-width: 768px) {
-    position: static;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
+  display: inline-block;
+  margin-bottom: 1rem;
 `;
 
+// ==========================================================
+// Elephant: An image component for the elephant silhouette
+// ==========================================================
 const Elephant = styled.img`
   max-width: 180px;
-  margin: 0 auto 1rem auto;
+  margin: 0 auto 1rem;
   display: block;
+
   @media (max-width: 768px) {
     max-width: 120px;
   }
 `;
 
+// ==========================================================
+// Tagline: Displays a headline or slogan
+// ==========================================================
 const Tagline = styled.h2`
   font-size: 1.2rem;
   color: #333;
-  margin-top: 1rem;
+  margin: 1rem auto 0;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+
   @media (max-width: 768px) {
     font-size: 1rem;
   }
 `;
 
-// ========== PRODUCTS SECTION ==========
-
-const ProductsSection = styled.section`
-  background: #2b2b2b url('https://i.ibb.co/xFnT7t1/wood-texture.jpg') repeat center/cover;
-  /* ^ You can replace with your own texture or color */
-  padding: 2rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
+// ==========================================================
+// ProductCard: Card for a single product
+// ==========================================================
 const ProductCard = styled.div`
   background: #fff;
   width: 250px;
@@ -91,6 +84,7 @@ const ProductCard = styled.div`
   overflow: hidden;
   position: relative;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
@@ -98,23 +92,33 @@ const ProductCard = styled.div`
   }
 `;
 
+// ==========================================================
+// PlateImage: Image representing the product on a circular plate
+// ==========================================================
 const PlateImage = styled.img`
   width: 100%;
   display: block;
   transition: transform 0.3s ease;
+
   &:hover {
     transform: scale(1.05);
   }
 `;
 
+// ==========================================================
+// ProductName: The product title/name
+// ==========================================================
 const ProductName = styled.h3`
   margin: 0.5rem 0;
   font-size: 1.1rem;
   color: #333;
 `;
 
+// ==========================================================
+// PriceBadge: A circular badge showing product price
+// ==========================================================
 const PriceBadge = styled.div`
-  background: #d2b48c; /* Gold / Tan color */
+  background: ${colors.tanGold || '#d2b48c'};
   color: #000;
   font-weight: bold;
   position: absolute;
@@ -127,13 +131,14 @@ const PriceBadge = styled.div`
   transition: background 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background: #c9a671; /* Slightly darker gold */
+    background: ${colors.darkTanGold || '#c9a671'};
     color: #fff;
   }
 `;
 
-// ========== FOOTER / CALL-TO-ACTION ==========
-
+// ==========================================================
+// FooterSection: Footer container with call-to-action styles
+// ==========================================================
 const FooterSection = styled.footer`
   background: #000;
   color: #fff;
@@ -141,32 +146,41 @@ const FooterSection = styled.footer`
   padding: 2rem 1rem;
 `;
 
+// ==========================================================
+// ButtonHover: Animation for button hover effect
+// ==========================================================
 const ButtonHover = keyframes`
   0% { transform: scale(1); }
   50% { transform: scale(1.02); }
   100% { transform: scale(1); }
 `;
 
+// ==========================================================
+// OrderButton: CTA button style
+// ==========================================================
 const OrderButton = styled.a`
   display: inline-block;
-  background: #d2b48c;
+  background: ${colors.tanGold || '#d2b48c'};
   color: #000;
   font-weight: bold;
   padding: 1rem 2rem;
-  border-radius: 4px;
   text-decoration: none;
   margin-bottom: 1rem;
   transition: background 0.3s ease, color 0.3s ease;
+
   &:hover {
-    background: #c9a671;
+    background: ${colors.darkTanGold || '#c9a671'};
     color: #fff;
-    animation: ${ButtonHover} 1s ease infinite;
+    animation: ${ButtonHover} 1s ease;
   }
 `;
 
+// ==========================================================
+// PhoneNumber: Styled phone number link (click-to-call)
+// ==========================================================
 const PhoneNumber = styled.a`
   display: inline-block;
-  color: #d2b48c;
+  color: ${colors.tanGold || '#d2b48c'};
   font-size: 1.1rem;
   margin-top: 1rem;
   text-decoration: none;
@@ -177,47 +191,17 @@ const PhoneNumber = styled.a`
   }
 `;
 
-// ========== MAIN COMPONENT ==========
-
+// ==========================================================
+// Main App Component
+// ==========================================================
 export default function App() {
   return (
-    <PageContainer>
-      {/* Top Banner */}
-      <Banner>
-        <LogoPlaceholder>Your Logo</LogoPlaceholder>
-        <Elephant src={ElephantImg} alt="Elephant Silhouette" />
-        <Tagline>
-          "Savor the flavors of our exquisite dishes, where every bite tells a delicious story."
-        </Tagline>
-      </Banner>
-
-      {/* Products Section */}
-      <ProductsSection>
-        {/* Fried Beans Card */}
-        <ProductCard>
-          <PriceBadge>$15</PriceBadge>
-          <PlateImage src={FriedBeansImg} alt="Fried Beans Plate" />
-          <ProductName>Fried Beans</ProductName>
-        </ProductCard>
-
-        {/* Boiled Beans Card */}
-        <ProductCard>
-          <PriceBadge>$9</PriceBadge>
-          <PlateImage src={BoiledBeansImg} alt="Boiled Beans Plate" />
-          <ProductName>Boiled Beans</ProductName>
-        </ProductCard>
-      </ProductsSection>
-
-      {/* Footer / CTA Section */}
-      <FooterSection>
-        <OrderButton href="#order-now">
-          Order Now
-        </OrderButton>
-        <br />
-        <PhoneNumber href="tel:+254712345987">
-          +254 712 345 987
-        </PhoneNumber>
-      </FooterSection>
-    </PageContainer>
+    <SinglePageContainer>
+      {/* The Header, ProductsSection, and Footer are imported components.
+          They should be optimized individually if needed */}
+      <Header />
+      <ProductsSection />
+      <Footer />
+    </SinglePageContainer>
   );
 }
