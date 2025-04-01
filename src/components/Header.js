@@ -3,66 +3,82 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { colors } from '../theme';
 import buffaloImage from '../assets/buffalo.jpg';
+import logoImage from '../assets/logo.jpg'; // New logo asset
 
-/* Fade-in animation for smooth appearance */
-// Good use of keyframes for a subtle fade-in effect. This adds a polished touch to the UI.
+// Fade-in animation for a smooth appearance
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 `;
 
-/* Banner using the buffalo image as a background */
-// The Banner component is well-structured and leverages styled-components effectively.
-// Consider making the height dynamic (e.g., using a prop) for more flexibility across different pages.
+// Banner using the buffalo image as the background
 const Banner = styled.header`
   position: relative;
   width: 100%;
-  height: 60vh; /* Adjust height for better responsiveness */
-  background-image: url(${buffaloImage}); // Nice use of a background image for visual appeal.
+  height: 60vh; /* Adjust the height as needed */
+  background-image: url(${buffaloImage});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 1rem;
-  animation: ${fadeIn} 1s ease-out; // Smooth animation enhances user experience.
+  animation: ${fadeIn} 1s ease-out;
 `;
 
-/* Logo styling */
-// The Logo component is clean and readable. The text-shadow is a nice touch for contrast.
-// Consider making the font size and color configurable via props for reusability.
-const Logo = styled.div`
-  font-size: 2.5rem; /* Slightly larger for emphasis */
+// TopBar for placing the logo next to the menu text in the top left corner
+const TopBar = styled.div`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+`;
+
+// LogoImage displays the logo icon
+const LogoImage = styled.img`
+  width: 50px;   /* Adjust size as needed */
+  height: auto;
+  margin-right: 0.5rem;
+`;
+
+// LogoText displays the text "Menu" next to the logo icon
+const LogoText = styled.div`
+  font-size: 2.5rem;
   font-weight: 700;
-  color: ${colors.primary}; // Good use of theme colors for consistency.
-  margin-bottom: 1rem; /* Add spacing below the logo */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add subtle text shadow for better readability */
+  color: ${colors.primary};
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+`;
+
+// Tagline centered in the banner
+const Tagline = styled.h2`
+  font-size: 1.2rem;
+  color: ${colors.text};
+  max-width: 600px;
+  margin: 0 auto;
+  animation: ${fadeIn} 1.5s ease-out;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 /**
- * Header component with improved layout and spacing for aesthetic appeal.
- * 
- * Pros:
- * - Clean and modular design using styled-components.
- * - Good use of animations and theme-based styling.
- * - Memoization with React.memo is a nice optimization for preventing unnecessary re-renders.
- * 
- * Suggestions:
- * - The inline style for the Logo's position could be moved to the styled-component for consistency.
- * - Consider adding accessibility features, such as ARIA roles or alt text for the background image.
- * - If the Header is reused across multiple pages, allow customization via props (e.g., dynamic text or background).
+ * Header component displays a background image with a top bar that includes a logo (image + text)
+ * next to the "Menu" label. The tagline is centered within the banner.
  */
 function Header() {
   return (
     <Banner>
-      {/* Inline styles for positioning could be moved to the styled-component for better maintainability */}
-      <Logo style={{ position: 'absolute', top: '1rem', left: '1rem' }}>Menu</Logo>
+      <TopBar>
+        <LogoImage src={logoImage} alt="Logo" />
+        <LogoText>Menu</LogoText>
+      </TopBar>
     </Banner>
   );
 }
 
-// React.memo is a good choice here to optimize rendering for a static header component.
 export default React.memo(Header);
