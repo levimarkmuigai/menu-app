@@ -54,17 +54,7 @@ const LogoText = styled.div`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
-// Tagline centered in the banner
-const Tagline = styled.h2`
-  font-size: 1.2rem;
-  color: ${colors.text};
-  max-width: 600px;
-  margin: 0 auto;
-  animation: ${fadeIn} 1.5s ease-out;
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-`;
+
 
 /**
  * Header component displays a background image with a top bar that includes a logo (image + text)
@@ -77,6 +67,7 @@ function Header() {
         <LogoImage src={logoImage} alt="Logo" />
         <LogoText>Menu</LogoText>
       </TopBar>
+
     </Banner>
   );
 }
